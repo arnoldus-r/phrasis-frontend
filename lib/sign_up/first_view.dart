@@ -1,37 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:phrasis_frontend/sign_up/first_view.dart';
-
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
 
-void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pharasis',
-      theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: phPrimary,
-          brightness: Brightness.light,
-        ),
-      ),
-      home: Login(),
-    );
-  }
-}
-
-class Login extends StatefulWidget {
-  const Login({super.key});
+class First extends StatefulWidget {
+  const First({super.key});
 
   @override
-  State<Login> createState() => _Login();
+  State<First> createState() => _First();
 }
 
-class _Login extends State<Login> {
+class _First extends State<First> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -61,7 +40,7 @@ class _Login extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Bienvenido',
+                    'Registro',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -79,7 +58,28 @@ class _Login extends State<Login> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 0, vertical: 8),
                             child: TextFormField(
-                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                icon: Icon(Icons.person_rounded),
+                                labelText: 'Usuario',
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 13),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                return null;
+                              },
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 8),
+                            child: TextFormField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -91,7 +91,7 @@ class _Login extends State<Login> {
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your correo';
+                                  return 'Please enter your email';
                                 }
                                 return null;
                               },
@@ -133,19 +133,20 @@ class _Login extends State<Login> {
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
+
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 0, vertical: 21),
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  Navigator.push(
+                                  /*Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => HomePage(
                                               email: emailController.text,
                                             )),
-                                  );
+                                  );*/
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
@@ -153,7 +154,7 @@ class _Login extends State<Login> {
                                   );
                                 }
                               },
-                              child: Text('Entrar'),
+                              child: Text('Siguiente'),
                             ),
                           ),
                           Align(
@@ -163,19 +164,19 @@ class _Login extends State<Login> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    const Text('¿No tienes cuenta?'),
-                                    TextButton(
+                                    const Text(''),
+                                    ElevatedButton(
                                       child: const Text(
-                                        '¡Registrate!',
+                                        'Atras',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                       onPressed: () {
-                                        Navigator.push(
+                                        /*Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => First()),
-                                        );
+                                              builder: (context) => Signin()),
+                                        );*/
                                       },
                                     )
                                   ],
@@ -195,54 +196,5 @@ class _Login extends State<Login> {
         ),
       ),
     );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.email});
-
-  final String email;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Home Page'),
-        ),
-        body: Column(
-          children: [
-            Text(email),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Go back!"),
-              ),
-            ),
-          ],
-        ));
-  }
-}
-
-class Signin extends StatelessWidget {
-  const Signin({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      children: [
-        Text("Signin"),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("Go back!"),
-          ),
-        ),
-      ],
-    ));
   }
 }
