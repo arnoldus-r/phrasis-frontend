@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phrasis_frontend/sign_up/first_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
+import 'package:phrasis_frontend/widget/email_field.dart';
+
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -62,7 +64,7 @@ class _Login extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Bienvenidos',
+                    'Bienveidos',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -79,25 +81,7 @@ class _Login extends State<Login> {
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 0, vertical: 8),
-                            child: TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                prefixIcon: Icon(Icons.email),
-                                labelText: 'Correo Electronico',
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 13),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Plis enter your coreo';
-                                }
-                                return null;
-                              },
-                              style: TextStyle(fontSize: 16),
-                            ),
+                            child: EmailField(controller: emailController),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
@@ -193,27 +177,5 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ));
-  }
-}
-
-class Signin extends StatelessWidget {
-  const Signin({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      children: [
-        Text("Signin"),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("Go back!"),
-          ),
-        ),
-      ],
-    ));
   }
 }

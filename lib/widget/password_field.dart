@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phrasis_frontend/widget/custom_text_field.dart';
 
 const int passwordMinLenght = 8;
 const String labelText = 'Contraseña';
@@ -24,26 +25,20 @@ class _PasswordField extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return CustomTextField(
       obscureText: passwordHidden,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        prefixIcon: const Icon(Icons.lock),
-        suffixIcon: IconButton(
-          icon: Icon(passwordHidden ? Icons.visibility : Icons.visibility_off),
-          onPressed: () {
-            setState(
-              () {
-                passwordHidden = !passwordHidden;
-              },
-            );
-          },
-        ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
-        labelText: labelText,
+      prefixIcon: const Icon(Icons.lock),
+      suffixIcon: IconButton(
+        icon: Icon(passwordHidden ? Icons.visibility : Icons.visibility_off),
+        	onPressed: () {
+          	setState(
+            	() {
+              	passwordHidden = !passwordHidden;
+            },
+          );
+        },
       ),
+      	labelText: labelText,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return errorNull;
@@ -56,8 +51,3 @@ class _PasswordField extends State<PasswordField> {
     );
   }
 }
-
-
-/* rfc2822 email validator
-[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?
-*/
