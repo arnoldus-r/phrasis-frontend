@@ -1,38 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:phrasis_frontend/sign_up/first_view.dart';
-import 'package:phrasis_frontend/widget/password_field.dart';
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Second extends StatefulWidget {
+  const Second({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pharasis',
-      theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: phPrimary,
-          brightness: Brightness.light,
-        ),
-      ),
-      home: Login(),
-    );
-  }
+  State<Second> createState() => _Second();
 }
 
-class Login extends StatefulWidget {
-  const Login({super.key});
-
-  @override
-  State<Login> createState() => _Login();
-}
-
-class _Login extends State<Login> {
+class _Second extends State<Second> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -62,7 +40,7 @@ class _Login extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Bienvenidos',
+                    'Registro fase 2',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -79,8 +57,41 @@ class _Login extends State<Login> {
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 0, vertical: 8),
+                            child: CircleAvatar(
+                              backgroundColor: Color(0xffE6E6E6),
+                              radius: 45,
+                              child: Icon(
+                                Icons.person_rounded,
+                                color: Color(0xffCCCCCC),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 8),
                             child: TextFormField(
-                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                prefixIcon: Icon(Icons.person_outlined),
+                                labelText: 'Nombre',
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 13),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                return null;
+                              },
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 8),
+                            child: TextFormField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -92,7 +103,7 @@ class _Login extends State<Login> {
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Plis enter your coreo';
+                                  return 'Please enter your';
                                 }
                                 return null;
                               },
@@ -102,7 +113,37 @@ class _Login extends State<Login> {
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 0, vertical: 8),
-                            child: PasswordField(controller: passwordController),
+                            child: TextFormField(
+                              obscureText: passwordVisible,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                prefixIcon: Icon(Icons.lock),
+                                suffixIcon: IconButton(
+                                  icon: Icon(passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        passwordVisible = !passwordVisible;
+                                      },
+                                    );
+                                  },
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 13),
+                                labelText: 'Contraseña',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                return null;
+                              },
+                              style: TextStyle(fontSize: 16),
+                            ),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
@@ -110,21 +151,21 @@ class _Login extends State<Login> {
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  Navigator.push(
+                                  /*Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => HomePage(
                                               email: emailController.text,
                                             )),
-                                  );
+                                  );*/
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                        content: Text('Please fill nput')),
+                                        content: Text('Please fill input')),
                                   );
                                 }
                               },
-                              child: Text('Entrar'),
+                              child: Text('Siguiente'),
                             ),
                           ),
                           Align(
@@ -134,19 +175,19 @@ class _Login extends State<Login> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    const Text('¿No tienes cuenta?'),
-                                    TextButton(
+                                    const Text(''),
+                                    ElevatedButton(
                                       child: const Text(
-                                        '¡Registrate!',
+                                        'Atras',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                       onPressed: () {
-                                        Navigator.push(
+                                        /*Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => First()),
-                                        );
+                                              builder: (context) => Signin()),
+                                        );*/
                                       },
                                     )
                                   ],
@@ -166,54 +207,5 @@ class _Login extends State<Login> {
         ),
       ),
     );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.email});
-
-  final String email;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Home Page'),
-        ),
-        body: Column(
-          children: [
-            Text(email),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Go back!"),
-              ),
-            ),
-          ],
-        ));
-  }
-}
-
-class Signin extends StatelessWidget {
-  const Signin({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      children: [
-        Text("Signin"),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("Go back!"),
-          ),
-        ),
-      ],
-    ));
   }
 }
