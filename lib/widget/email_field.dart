@@ -6,7 +6,8 @@ const String errorNull = 'Debes llenar el campo';
 const String errorEmail = 'Correo invalido';
 
 // RFC2822 Email Validation
-const String p = r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+const String pattern = r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+final regExp = RegExp(pattern);
 
 class EmailField extends StatefulWidget {
   const EmailField({super.key, required this.controller});
@@ -18,12 +19,6 @@ class EmailField extends StatefulWidget {
 }
 
 class _EmailField extends State<EmailField> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
@@ -33,7 +28,7 @@ class _EmailField extends State<EmailField> {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return errorNull;
-        } else if (RegExp(p).hasMatch(value) == false) {
+        } else if (!regExp.hasMatch(value)) {
           return errorEmail;
         }
         return null;

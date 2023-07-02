@@ -15,11 +15,11 @@ class CustomTextField extends StatefulWidget {
     required this.controller,
     required this.validator,
     required this.labelText,
+    this.prefixIcon,
+    this.suffixIcon,
     this.inputType = TextInputType.text,
     this.obscureText = false,
     this.minLines = 1,
-    this.prefixIcon,
-    this.suffixIcon,
   });
 
   @override
@@ -27,11 +27,6 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextField extends State<CustomTextField> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(

@@ -19,26 +19,21 @@ class _PasswordField extends State<PasswordField> {
   bool passwordHidden = true;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return CustomTextField(
       obscureText: passwordHidden,
       prefixIcon: const Icon(Icons.lock),
       suffixIcon: IconButton(
         icon: Icon(passwordHidden ? Icons.visibility : Icons.visibility_off),
-        	onPressed: () {
-          	setState(
-            	() {
-              	passwordHidden = !passwordHidden;
+        onPressed: () {
+          setState(
+            () {
+            	passwordHidden = !passwordHidden;
             },
           );
         },
       ),
-      	labelText: labelText,
+      labelText: labelText,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return errorNull;
