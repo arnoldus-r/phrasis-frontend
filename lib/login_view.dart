@@ -6,6 +6,12 @@ import 'package:phrasis_frontend/widget/email_field.dart';
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
 
+const String loginLabelText = 'Entrar';
+const String haveUser = '¿No tienes cuenta?';
+const String signUpLabelText = 'Registrate';
+const String titleText = 'Iniciar sesión';
+
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -24,23 +30,24 @@ class _Login extends State<Login> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         backgroundColor: phSecondary,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(21.0),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _form(),
-                  ],
+        body: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: SafeArea(
+                child: Padding(
+                padding: const EdgeInsets.all(21.0),
+                  child: Center(
+                    child: _form(),
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );
+
   }
 
   Widget _form() {
@@ -49,65 +56,87 @@ class _Login extends State<Login> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 89),
+          const SizedBox(height: 55),
+          _Title(),
+          const SizedBox(height: 34),
           EmailField(controller: emailController),
           const SizedBox(height: 21),
           PasswordField(controller: passwordController),
           const SizedBox(height: 21),
-          ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(
-                      email: emailController.text,
-                    )
-                  ),
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Please fill nput')
-                  ),
-                );
-              }
-            },
-            child: SizedBox(
-              width: double.infinity,
-              child: const Text(
-                'Entrar',
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('¿No tienes cuenta?'),
-              TextButton(
-                child: const Text(
-                  '¡Registrate!',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => First()
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+          _LoginButton(),
+          _SignUp(),
         ],
       ),
     );
+
   }
+
+  Widget _Title() {
+    return Text(
+      titleText,
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _LoginButton() {
+    return ElevatedButton(
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(
+                email: emailController.text,
+              )
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Please fill nput')
+            ),
+          );
+        }
+      },
+      child: SizedBox(
+        width: double.infinity,
+        child: const Text(
+          loginLabelText,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+
+  }
+
+  Widget _SignUp() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(haveUser),
+        TextButton(
+          child: const Text(
+            signUpLabelText,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => First()
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
 }
 
 class HomePage extends StatelessWidget {
