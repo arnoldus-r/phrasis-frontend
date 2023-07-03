@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-//import 'package:phrasis_frontend/sign_up/first_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/widget/name_field.dart';
 import 'package:phrasis_frontend/widget/user_field.dart';
+import 'package:phrasis_frontend/signup_end_view.dart';
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -11,7 +11,7 @@ const phSecondary = Color(0xFFEBE8EE);
 const String titleText = 'Registro';
 const String nextLabelText = 'Siguiente';
 const String haveUser = '¿No tienes cuenta?';
-const String signUpLabelText = 'Registrate';
+const String signUpLabelText = 'Registrate'; 
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -103,16 +103,12 @@ class _SignUp extends State<SignUp> {
     return ElevatedButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          /*
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(
-                email: emailController.text,
-              )
+              builder: (context) => SignUpEnd(),
             ),
           );
-          */
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -132,29 +128,4 @@ class _SignUp extends State<SignUp> {
 
   }
 
-  /*Widget _SignUp() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(haveUser),
-        TextButton(
-          child: const Text(
-            signUpLabelText,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => First()
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-*/
 }

@@ -7,7 +7,7 @@ const String errorLetter = 'Solo se permiten letras';
 const String errorLenght = 'Debe tener maximo 16 caracteres';
 const int maxNameLenght = 16;
 
-const String pattern = r"[A-ZÀ-ÿa-z]";
+const String pattern = r"[A-Za-zÀ-ÿ]*";
 final regExp = RegExp(pattern);
 
 class NameField extends StatefulWidget {

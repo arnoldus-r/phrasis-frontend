@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:phrasis_frontend/signup_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
+import 'package:phrasis_frontend/widget/name_field.dart';
+import 'package:phrasis_frontend/widget/user_field.dart';
+import 'package:phrasis_frontend/widget/profile_picture.dart';
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
 
-const String titleText = 'Iniciar sesión';
-const String loginLabelText = 'Entrar';
+const String titleText = 'Registro';
+const String nextLabelText = 'Siguiente';
 const String haveUser = '¿No tienes cuenta?';
 const String signUpLabelText = 'Registrate';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignUpEnd extends StatefulWidget {
+  const SignUpEnd({super.key});
 
   @override
-  State<Login> createState() => _Login();
+  State<SignUpEnd> createState() => _SignUpEnd();
 }
 
-class _Login extends State<Login> {
+class _SignUpEnd extends State<SignUpEnd> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController userController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,17 @@ class _Login extends State<Login> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         backgroundColor: phSecondary,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: phPrimary,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
         body: CustomScrollView(
           slivers: [
             SliverFillRemaining(
@@ -55,15 +70,22 @@ class _Login extends State<Login> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 55),
-          _Title(),
-          const SizedBox(height: 34),
+          //const SizedBox(height: 21),
+          //_Title(),
+          //const SizedBox(height: 21),
+          ProfilePicture(size: 40), 
+          const SizedBox(height: 21),
+          UserField(controller: userController),
+          const SizedBox(height: 21),
+          NameField(controller: nameController),
+          const SizedBox(height: 21),
           EmailField(controller: emailController),
           const SizedBox(height: 21),
           PasswordField(controller: passwordController),
           const SizedBox(height: 21),
-          _LoginButton(),
-          _SignUp(),
+           
+          _FinishButton(),
+          //_SignUp(), 
         ],
       ),
     );
@@ -80,18 +102,18 @@ class _Login extends State<Login> {
     );
   }
 
-  Widget _LoginButton() {
+  Widget _FinishButton() {
     return ElevatedButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          Navigator.push(
+          /*Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => HomePage(
                 email: emailController.text,
               )
             ),
-          );
+          );*/
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -103,7 +125,7 @@ class _Login extends State<Login> {
       child: SizedBox(
         width: double.infinity,
         child: const Text(
-          loginLabelText,
+          nextLabelText,
           textAlign: TextAlign.center,
         ),
       ),
@@ -111,56 +133,4 @@ class _Login extends State<Login> {
 
   }
 
-  Widget _SignUp() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(haveUser),
-        TextButton(
-          child: const Text(
-            signUpLabelText,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SignUp()
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.email});
-
-  final String email;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Home Page'),
-        ),
-        body: Column(
-          children: [
-            Text(email),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Go back!"),
-              ),
-            ),
-          ],
-        ) );
-  }
 }
