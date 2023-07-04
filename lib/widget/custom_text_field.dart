@@ -8,6 +8,8 @@ class CustomTextField extends StatefulWidget {
   final IconButton? suffixIcon;
   final String labelText;
   final Function validator;
+  final bool isReadOnly;
+  //final Function function;
   final TextEditingController controller;
 
   const CustomTextField({
@@ -20,6 +22,8 @@ class CustomTextField extends StatefulWidget {
     this.inputType = TextInputType.text,
     this.obscureText = false,
     this.minLines = 1,
+    this.isReadOnly = false,
+    //this.function = () { return null; },
   });
 
   @override
@@ -30,9 +34,12 @@ class _CustomTextField extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget.isReadOnly,
+      //onTap: () => widget.function(),
       obscureText: widget.obscureText,
       keyboardType: widget.inputType,
       minLines: widget.minLines,
+      maxLines: widget.minLines,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),

@@ -3,7 +3,9 @@ import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/widget/name_field.dart';
 import 'package:phrasis_frontend/widget/user_field.dart';
+import 'package:phrasis_frontend/widget/area_field.dart';
 import 'package:phrasis_frontend/widget/profile_picture.dart';
+import 'package:intl/intl.dart';
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -26,6 +28,8 @@ class _SignUpEnd extends State<SignUpEnd> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController userController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  String dropdownvalue = 'Idioma';
 
   @override
   Widget build(BuildContext context) {
@@ -33,33 +37,24 @@ class _SignUpEnd extends State<SignUpEnd> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         backgroundColor: phSecondary,
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: phPrimary,
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        body: CustomScrollView(
+        //appBar: _bar(),
+        body: Stack(children: [_bar(), CustomScrollView(
           slivers: [
             SliverFillRemaining(
               hasScrollBody: false,
-              child: SafeArea(
+              child:
+                SafeArea(
                 child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 21.0),
                   child: Center(
                     child: _form(),
                   ),
                 ),
-              ),
-            ),
+              
+            ),),
           ],
         ),
-      ),
+      ],),),
     );
 
   }
@@ -75,14 +70,21 @@ class _SignUpEnd extends State<SignUpEnd> {
           //const SizedBox(height: 21),
           ProfilePicture(size: 40), 
           const SizedBox(height: 21),
-          UserField(controller: userController),
+          AreaField(controller: userController),
           const SizedBox(height: 21),
-          NameField(controller: nameController),
+          Container(
+            width: double.infinity,
+            child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+            Expanded(child:_DateLabel()),
+            Expanded(child: Center(child: _Idiomas()),),
+            ],
+          ),),
           const SizedBox(height: 21),
-          EmailField(controller: emailController),
-          const SizedBox(height: 21),
-          PasswordField(controller: passwordController),
-          const SizedBox(height: 21),
+          //PasswordField(controller: passwordController),
+          //const SizedBox(height: 21),
            
           _FinishButton(),
           //_SignUp(), 
@@ -99,6 +101,72 @@ class _SignUpEnd extends State<SignUpEnd> {
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),
+    );
+  }
+
+  Widget _Idiomas() {   
+  
+  // List of items in our dropdown menu
+  var items = [    
+    'Idioma',
+    'Español',
+    'Ingles',
+  ];
+
+    return DropdownButton(
+                
+              // Initial Value
+              value: dropdownvalue,
+                
+              // Down Arrow Icon
+              icon: const Icon(Icons.keyboard_arrow_down),    
+                
+              // Array list of items
+              items: items.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+              // After selecting the desired option,it will
+              // change button value to selected value
+              onChanged: (String? newValue) { 
+                setState(() {
+                  dropdownvalue = newValue!;
+                });
+              },
+            );
+  }
+
+  Widget _DateLabel() {
+    return TextField(
+      controller: dateController, //editing controller of this TextField
+      decoration: const InputDecoration( 
+        icon: Icon(Icons.calendar_today), //icon of text field
+        labelText: "Enter Date", //label text of field
+      ),
+      readOnly: true,  // when true user cannot edit text 
+      onTap: () async {
+        DateTime? pickedDate = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(), //get today's date
+          firstDate:DateTime(1960),//.now().subtract(Duration(days: 80 * 365)), //DateTime.now() - not to allow to choose before today.
+          lastDate: DateTime.now().add(Duration(days: 30)), 
+        );
+
+                  if(pickedDate != null ){
+                      print(pickedDate);  //get the picked date in the format => 2022-07-04 00:00:00.000
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
+                      print(formattedDate); //formatted date output using intl package =>  2022-07-04
+                        //You can format date as per your need
+
+                      setState(() {
+                         dateController.text = formattedDate; //set foratted date to TextField value. 
+                      });
+                  }else{
+                      print("Date is not selected");
+                  }
+            }
     );
   }
 
@@ -131,6 +199,20 @@ class _SignUpEnd extends State<SignUpEnd> {
       ),
     );
 
+  }
+
+  Widget _bar() {
+    return AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: phPrimary,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        );
   }
 
 }
