@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phrasis_frontend/signup_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
+import 'package:phrasis_frontend/home_view.dart';
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -56,21 +57,21 @@ class _Login extends State<Login> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 55),
-          _Title(),
+          _title(),
           const SizedBox(height: 34),
           EmailField(controller: emailController),
           const SizedBox(height: 21),
           PasswordField(controller: passwordController),
           const SizedBox(height: 21),
-          _LoginButton(),
-          _SignUp(),
+          _loginButton(),
+          _signUp(),
         ],
       ),
     );
 
   }
 
-  Widget _Title() {
+  Widget _title() {
     return Text(
       titleText,
       style: TextStyle(
@@ -80,16 +81,14 @@ class _Login extends State<Login> {
     );
   }
 
-  Widget _LoginButton() {
+  Widget _loginButton() {
     return ElevatedButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(
-                email: emailController.text,
-              )
+              builder: (context) => Home()
             ),
           );
         } else {
@@ -111,7 +110,7 @@ class _Login extends State<Login> {
 
   }
 
-  Widget _SignUp() {
+  Widget _signUp() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -136,31 +135,4 @@ class _Login extends State<Login> {
     );
   }
 
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.email});
-
-  final String email;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Home Page'),
-        ),
-        body: Column(
-          children: [
-            Text(email),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Go back!"),
-              ),
-            ),
-          ],
-        ) );
-  }
 }

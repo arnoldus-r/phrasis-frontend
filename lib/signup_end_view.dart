@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phrasis_frontend/widget/custom_text_field.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/widget/name_field.dart';
@@ -29,7 +30,8 @@ class _SignUpEnd extends State<SignUpEnd> {
   TextEditingController nameController = TextEditingController();
   TextEditingController userController = TextEditingController();
   TextEditingController dateController = TextEditingController();
-  String dropdownvalue = 'Idioma';
+  String dropdownvalue = 'ES';
+  String drop = 'Selecciona';
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +39,10 @@ class _SignUpEnd extends State<SignUpEnd> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         backgroundColor: phSecondary,
-        //appBar: _bar(),
-        body: Stack(children: [_bar(), CustomScrollView(
+        appBar: _bar(),
+        body: //Stack(children: [
+          //_bar(),
+          CustomScrollView(
           slivers: [
             SliverFillRemaining(
               hasScrollBody: false,
@@ -54,7 +58,9 @@ class _SignUpEnd extends State<SignUpEnd> {
             ),),
           ],
         ),
-      ],),),
+        //_barr(),
+      //],),
+      ),
     );
 
   }
@@ -68,21 +74,35 @@ class _SignUpEnd extends State<SignUpEnd> {
           //const SizedBox(height: 21),
           //_Title(),
           //const SizedBox(height: 21),
-          ProfilePicture(size: 40), 
-          const SizedBox(height: 21),
+          ProfilePicture(size: 34), 
+          const SizedBox(height: 13),
           AreaField(controller: userController),
-          const SizedBox(height: 21),
+          const SizedBox(height: 13),
+          
+          _DateLabel(),
+          const SizedBox(height: 13),
+          _Idiomas(),
+          
+          const SizedBox(height: 13),
+          _Intereses(),
+          const SizedBox(height: 13),
+
           Container(
             width: double.infinity,
             child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            Expanded(child:_DateLabel()),
-            Expanded(child: Center(child: _Idiomas()),),
+            Flexible(flex: 57, child:_prueba()),
+            Flexible(flex: 43, child: _prueba()),
             ],
           ),),
-          const SizedBox(height: 21),
+          
+          _prueba(),
+          //Text('b'),
+          //Text('c'),
+          // Fecha de nacimiento
+          // ¿Cuando naciste?
           //PasswordField(controller: passwordController),
           //const SizedBox(height: 21),
            
@@ -108,18 +128,24 @@ class _SignUpEnd extends State<SignUpEnd> {
   
   // List of items in our dropdown menu
   var items = [    
-    'Idioma',
-    'Español',
-    'Ingles',
+    'ES',
+    'US',
   ];
 
-    return DropdownButton(
+    return DropdownButtonFormField(
                 
               // Initial Value
               value: dropdownvalue,
-                
+              decoration: InputDecoration(
+                labelText: 'Idioma',
+                prefixIcon: Icon(Icons.language),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
+      ),
               // Down Arrow Icon
-              icon: const Icon(Icons.keyboard_arrow_down),    
+              //icon: const Icon(Icons.keyboard_arrow_down),    
                 
               // Array list of items
               items: items.map((String items) {
@@ -138,15 +164,56 @@ class _SignUpEnd extends State<SignUpEnd> {
             );
   }
 
-  Widget _DateLabel() {
-    return TextField(
-      controller: dateController, //editing controller of this TextField
-      decoration: const InputDecoration( 
-        icon: Icon(Icons.calendar_today), //icon of text field
-        labelText: "Enter Date", //label text of field
+    Widget _Intereses() {   
+  
+  // List of items in our dropdown menu
+  var items = [ 
+  'Selecciona',   
+    'Motivación',
+    'Tristeza',
+    'Reflexión',
+    'Romantico',
+  ];
+
+    return DropdownButtonFormField(
+                
+              // Initial Value
+              value: drop,
+              decoration: InputDecoration(
+                labelText: 'Intereses',
+                prefixIcon: Icon(Icons.interests),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
       ),
-      readOnly: true,  // when true user cannot edit text 
-      onTap: () async {
+              // Down Arrow Icon
+              //icon: const Icon(Icons.keyboard_arrow_down),    
+                
+              // Array list of items
+              items: items.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+              // After selecting the desired option,it will
+              // change button value to selected value
+              onChanged: (String? newValue) { 
+                setState(() {
+                  drop = newValue!;
+                });
+              },
+            );
+  }
+
+  Widget _DateLabel() {
+    return CustomTextField(
+      prefixIcon: const Icon(Icons.calendar_month),
+      labelText: '¿Cuando naciste?',
+      controller: dateController,
+      isReadOnly: true,
+      tapFunction: () async {
         DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: DateTime.now(), //get today's date
@@ -201,7 +268,30 @@ class _SignUpEnd extends State<SignUpEnd> {
 
   }
 
-  Widget _bar() {
+  Widget _prueba() {
+    return //SizedBox(
+      //height: 14,
+      //child: 
+      TextFormField(
+        //maxLengh: 4,
+      decoration: InputDecoration(
+        
+        suffixIcon: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {},
+        ),
+
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50.0),
+        ),
+        contentPadding: const EdgeInsets.only(bottom: 8, top: 8, left: 13),
+      ),
+      //),
+      //style: TextStyle(fontSize: 12),
+    );
+  }
+
+  AppBar _bar() {
     return AppBar(
           leading: IconButton(
             icon: const Icon(

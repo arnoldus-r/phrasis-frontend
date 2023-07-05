@@ -23,6 +23,7 @@ class _AreaField extends State<AreaField> {
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
+      inputType: TextInputType.multiline,
       minLines: 3,
       labelText: labelText,
       validator: (value) {

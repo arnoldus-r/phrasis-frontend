@@ -7,15 +7,15 @@ class CustomTextField extends StatefulWidget {
   final Icon? prefixIcon;
   final IconButton? suffixIcon;
   final String labelText;
-  final Function validator;
+  final Function? validator;
   final bool isReadOnly;
-  //final Function function;
+  final Function? tapFunction;
   final TextEditingController controller;
 
   const CustomTextField({
     super.key,
     required this.controller,
-    required this.validator,
+    this.validator,
     required this.labelText,
     this.prefixIcon,
     this.suffixIcon,
@@ -23,7 +23,7 @@ class CustomTextField extends StatefulWidget {
     this.obscureText = false,
     this.minLines = 1,
     this.isReadOnly = false,
-    //this.function = () { return null; },
+    this.tapFunction,
   });
 
   @override
@@ -35,7 +35,7 @@ class _CustomTextField extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       readOnly: widget.isReadOnly,
-      //onTap: () => widget.function(),
+      onTap: () => widget.tapFunction!(),
       obscureText: widget.obscureText,
       keyboardType: widget.inputType,
       minLines: widget.minLines,
@@ -49,7 +49,7 @@ class _CustomTextField extends State<CustomTextField> {
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
         labelText: widget.labelText,
       ),
-      validator: (value) => widget.validator(value),
+      validator: (value) => widget.validator!(value),
       controller: widget.controller,
     );
   }

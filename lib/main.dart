@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phrasis_frontend/sign_up/first_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/login_view.dart';
