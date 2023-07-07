@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+const phPrimary = Color(0xFF604777);
+const phSecondary = Color(0xFFEBE8EE);
+
+final GlobalKey _contenido = GlobalKey();
+
+
+
 class Post extends StatefulWidget {
 
   final String username;
@@ -50,8 +57,8 @@ class _Post extends State<Post> {
       //color: Colors.red,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.green, width: 4),
-        //color: Colors.red,
+        //border: Border.all(color: Colors.green, width: 4),
+        color: phPrimary,
       ),
       //color: Colors.red,
       width: double.infinity,
@@ -68,26 +75,60 @@ class _Post extends State<Post> {
               width: double.infinity, child: Text(
               '@${widget.username}',
               textAlign: TextAlign.left, 
+              style: TextStyle(color: phSecondary),
               ),),
             ),
           ),
-          Stack(
+          /*Stack(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
+                width: double.infinity,
+                //height: _contenido.currentContext?.size?.height,
+                color: phSecondary,
+                //padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
                 //child: Text('Hola'),
               ),
               Container(
                 width: double.infinity,
+                //key: _contenido,
+                color: phSecondary,
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
                 child: Text(widget.content,
                   textAlign: TextAlign.center,),
               ),
             ],
-          ),
+          ),*/
+          Container(
+                width: double.infinity,
+                //key: _contenido,
+                
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
+                decoration: const BoxDecoration(
+                  color: phSecondary,
+    image: DecorationImage(
+        image: NetworkImage("https://img.freepik.com/free-photo/people-walking-down-street_1194-1142.jpg"),
+        fit: BoxFit.cover),
+  ),
+                child: Text(
+                  widget.content,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    //backgroundColor: phSecondary,
+                    /*background: Paint()
+                      ..strokeWidth = 30.0
+                      ..color = Colors.grey
+                      ..style = PaintingStyle.fill
+                      ..strokeJoin = StrokeJoin.round,*/
+                  ),
+                  ),
+              ),
           Container(
             //color: Colors.brown,
-            child: _actions()),
+            child: _actions()
+          ),
         ],
       ),
     );
@@ -100,8 +141,8 @@ class _Post extends State<Post> {
         children: [
           IconButton(
             icon: Icon(
-              Icons.favorite,
-              color: liked ? Colors.black : Colors.blue,
+              liked ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+              color: liked ? phSecondary : phSecondary,
             ),
             onPressed: () {
               print(liked);
@@ -114,21 +155,16 @@ class _Post extends State<Post> {
           ),
           IconButton(
             icon: Icon(
-              Icons.comment,
-              color: commented ? Colors.black : Colors.blue,
+              Icons.comment_rounded,
+              color: phSecondary,
+              //color: commented ? Colors.black : Colors.blue,
             ),
-            onPressed: () {
-              setState(
-                () {
-                  commented = !commented;
-                }
-              );
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: Icon(
-              Icons.bookmark,
-              color: marked ? Colors.black : Colors.blue,
+              marked ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+              color: marked ? phSecondary : phSecondary,
             ),
             onPressed: () {
               setState(
