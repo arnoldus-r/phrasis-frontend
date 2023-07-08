@@ -24,27 +24,12 @@ class _Search extends State<Search> {
         child: Align(
           alignment: AlignmentDirectional(0, 1),
           child: ListView(
+            scrollDirection: Axis.vertical,
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Enter a search term',
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => {},
-                    child: Text("Buscar"),
-                  ),
-                ],
-              ),
               Container(
+                margin: EdgeInsets.only(top: 20.0),
                 width: MediaQuery.of(context).size.width,
-                height: 550.0,
+                height: 650.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(34.0),
@@ -53,9 +38,32 @@ class _Search extends State<Search> {
                   color: phSecondary,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Text("Resultado"),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(top: 15.0),
+                            padding: EdgeInsets.only(
+                                top: 10, left: 7, right: 3, bottom: 10),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Buscar publicación',
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 15.0),
+                          child: IconButton(
+                            iconSize: 40,
+                            icon: const Icon(Icons.search_rounded),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
