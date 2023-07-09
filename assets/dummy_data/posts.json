@@ -1,0 +1,58 @@
+{
+  "posts": [
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "La política es el arte de buscar problemas, encontrarlos, realizar un diagnóstico falso y aplicar después remedios equivocados",
+      "backgroundImage": "assets/images/people.jpg"
+    },
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "Un amigo de todos es una amigo de nadie",
+      "backgroundImage": ""
+    },
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "Vive como si fueras a morir mañana; aprende como si el mundo fuera a durar para siempre",
+      "backgroundImage": "assets/images/nature.jpg"
+    },
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "La mayor declaración de amor es la que no se hace; el hombre que siente mucho, habla poco",
+      "backgroundImage": "assets/images/city.jpg"
+    },
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "La inspiración existe, pero tiene que encontrarte trabajando",
+      "backgroundImage": "assets/images/employer.jpg"
+    },
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "El único hombre que no se equivoca es el que nunca hace nada",
+      "backgroundImage": ""
+    },
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "La mejor manera de librarse de la tentación es caer en ella",
+      "backgroundImage": "assets/images/bar.jpg"
+    },
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "La mejor manera de librarse de la tentación es caer en ella",
+      "backgroundImage": "assets/images/bar.jpg"
+    },
+    {
+      "isPost": "true",
+      "username": "juan.perez",
+      "content": "El éxito tiene muchos padres, pero el fracaso es huérfano",
+      "backgroundImage": "assets/images/money.jpg"
+    }
+  ]
+}
