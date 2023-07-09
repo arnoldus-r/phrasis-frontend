@@ -4,8 +4,6 @@ import 'package:phrasis_frontend/search_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/widget/post.dart';
-import 'package:phrasis_frontend/fav_view.dart';
-
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -15,23 +13,16 @@ const String loginLabelText = 'Entrar';
 const String haveUser = '¿No tienes cuenta?';
 const String signUpLabelText = 'Registrate';
 
-const String ph1 = "La política es el arte de buscar problemas, encontrarlos, realizar un diagnóstico falso y aplicar después remedios equivocados";
-const String ph2 = "Un amigo de todos es una amigo de nadie";
-const String ph3 = "Vive como si fueras a morir mañana; aprende como si el mundo fuera a durar para siempre";
-const String ph4 = "La mayor declaración de amor es la que no se hace; el hombre que siente mucho, habla poco";
-const String ph5 = "La inspiración existe, pero tiene que encontrarte trabajando";
-const String ph6 = "El único hombre que no se equivoca es el que nunca hace nada";
-const String ph7 = "La mejor manera de librarse de la tentación es caer en ella";
-const String ph8 = "El éxito tiene muchos padres, pero el fracaso es huérfano";
+const String ph1 = "Esto es un comentario";
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Comment extends StatefulWidget {
+  const Comment({super.key});
 
   @override
-  State<Home> createState() => _Home();
+  State<Comment> createState() => _Comment();
 }
 
-class _Home extends State<Home> {
+class _Comment extends State<Comment> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -43,15 +34,9 @@ class _Home extends State<Home> {
       child: Scaffold(
         backgroundColor: phSecondary,
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(
-              Icons.edit,
-              color: phSecondary,
-            ),
-            onPressed: () {},// => Navigator.pop(context),
+          title: const Text('Comentarios'),
           ),
-          ),
-        endDrawer: Drawer(
+        /*endDrawer: Drawer(
           child: ListView(
             children: [
             const DrawerHeader(
@@ -102,14 +87,7 @@ class _Home extends State<Home> {
             ListTile(
               leading: Icon(Icons.bookmark_rounded),
               title: const Text('Favoritos'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Favorite()
-                  ),
-                );
-              },
+              onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.logout),
@@ -118,9 +96,9 @@ class _Home extends State<Home> {
             ),
 
             ],
-          ),
+          ),*/
 
-        ),
+        //),
         body: //CustomScrollView(
           //slivers: [
            // SliverFillRemaining(
@@ -158,21 +136,13 @@ class _Home extends State<Home> {
           //PasswordField(controller: passwordController),
           //const SizedBox(height: 21),
           const SizedBox(height: 8),
-          _publi(ph1, "people.jpg"),
+          _publi(ph1, ""),
           const SizedBox(height: 8),
-          _publi(ph2, ""),
+          _publi(ph1, ""),
           const SizedBox(height: 8),
-          _publi(ph3, "nature.jpg"),
+          _publi(ph1, ""),
           const SizedBox(height: 8),
-          _publi(ph4, "city.jpg"),
-          const SizedBox(height: 8),
-          _publi(ph5, "employer.jpg"),
-          const SizedBox(height: 8),
-          _publi(ph6, ""),
-          const SizedBox(height: 8),
-          _publi(ph7, "bar.jpg"),
-          const SizedBox(height: 8),
-          _publi(ph8, "money.jpg"),
+          _publi(ph1, ""),
           const SizedBox(height: 8),
           //_LoginButton(),
           //_SignUp(),
@@ -184,8 +154,8 @@ class _Home extends State<Home> {
 
   Widget _publi(String phrase, String imageName) {
     return Post(
-            isPost: true,
-            username: 'juan.perez',
+            isPost: false,
+            username: 'alguien.x',
             content: phrase,
             backgroundImage: 'assets/images/${imageName}',
           );

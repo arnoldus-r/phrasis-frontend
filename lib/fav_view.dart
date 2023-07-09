@@ -4,8 +4,6 @@ import 'package:phrasis_frontend/search_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/widget/post.dart';
-import 'package:phrasis_frontend/fav_view.dart';
-
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -24,14 +22,14 @@ const String ph6 = "El único hombre que no se equivoca es el que nunca hace nad
 const String ph7 = "La mejor manera de librarse de la tentación es caer en ella";
 const String ph8 = "El éxito tiene muchos padres, pero el fracaso es huérfano";
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Favorite extends StatefulWidget {
+  const Favorite({super.key});
 
   @override
-  State<Home> createState() => _Home();
+  State<Favorite> createState() => _Favorite();
 }
 
-class _Home extends State<Home> {
+class _Favorite extends State<Favorite> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -43,15 +41,9 @@ class _Home extends State<Home> {
       child: Scaffold(
         backgroundColor: phSecondary,
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(
-              Icons.edit,
-              color: phSecondary,
-            ),
-            onPressed: () {},// => Navigator.pop(context),
+          title: const Text('Favoritos'),
           ),
-          ),
-        endDrawer: Drawer(
+        /*endDrawer: Drawer(
           child: ListView(
             children: [
             const DrawerHeader(
@@ -102,14 +94,7 @@ class _Home extends State<Home> {
             ListTile(
               leading: Icon(Icons.bookmark_rounded),
               title: const Text('Favoritos'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Favorite()
-                  ),
-                );
-              },
+              onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.logout),
@@ -118,9 +103,9 @@ class _Home extends State<Home> {
             ),
 
             ],
-          ),
+          ),*/
 
-        ),
+        //),
         body: //CustomScrollView(
           //slivers: [
            // SliverFillRemaining(
@@ -158,19 +143,11 @@ class _Home extends State<Home> {
           //PasswordField(controller: passwordController),
           //const SizedBox(height: 21),
           const SizedBox(height: 8),
-          _publi(ph1, "people.jpg"),
-          const SizedBox(height: 8),
-          _publi(ph2, ""),
-          const SizedBox(height: 8),
           _publi(ph3, "nature.jpg"),
           const SizedBox(height: 8),
           _publi(ph4, "city.jpg"),
           const SizedBox(height: 8),
-          _publi(ph5, "employer.jpg"),
-          const SizedBox(height: 8),
           _publi(ph6, ""),
-          const SizedBox(height: 8),
-          _publi(ph7, "bar.jpg"),
           const SizedBox(height: 8),
           _publi(ph8, "money.jpg"),
           const SizedBox(height: 8),
@@ -186,6 +163,7 @@ class _Home extends State<Home> {
     return Post(
             isPost: true,
             username: 'juan.perez',
+            marked: true,
             content: phrase,
             backgroundImage: 'assets/images/${imageName}',
           );

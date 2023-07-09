@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 class ProfilePicture extends StatefulWidget {
   const ProfilePicture({super.key, this.size = 34});
 

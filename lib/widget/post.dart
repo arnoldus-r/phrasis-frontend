@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:phrasis_frontend/comen_view.dart';
+
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
+const phSecond = Color(0xC0503A69);
 
 final GlobalKey _contenido = GlobalKey();
 
@@ -11,7 +14,7 @@ class Post extends StatefulWidget {
 
   final String username;
   final String content;
-  final Image? backgroundImage;
+  final String backgroundImage;
   final bool isPost;
   final int likeNumber;
   final bool liked;
@@ -24,7 +27,7 @@ class Post extends StatefulWidget {
     required this.username,
     required this.content,
     required this.isPost,
-    this.backgroundImage,
+    this.backgroundImage = 'images/defaul.png',
     this.likeNumber = 0,
     this.liked = false,
     this.marked = false,
@@ -43,15 +46,19 @@ class _Post extends State<Post> {
 
   @override
   initialState() {
+    super.initState();
+    print('Iniciado');
+
+    setState( () {
     liked = widget.liked;
     commented = widget.commented;
     marked = widget.marked;
-
-    super.initState();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       clipBehavior: Clip.antiAlias,
       //color: Colors.red,
@@ -79,49 +86,26 @@ class _Post extends State<Post> {
               ),),
             ),
           ),
-          /*Stack(
-            children: [
-              Container(
-                width: double.infinity,
-                //height: _contenido.currentContext?.size?.height,
-                color: phSecondary,
-                //padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
-                //child: Text('Hola'),
-              ),
-              Container(
-                width: double.infinity,
-                //key: _contenido,
-                color: phSecondary,
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
-                child: Text(widget.content,
-                  textAlign: TextAlign.center,),
-              ),
-            ],
-          ),*/
           Container(
                 width: double.infinity,
                 //key: _contenido,
                 
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
-                decoration: const BoxDecoration(
+                padding: const EdgeInsets.symmetric(vertical: 21, horizontal: 13),
+                decoration: BoxDecoration(
                   color: phSecondary,
     image: DecorationImage(
-        image: NetworkImage("https://img.freepik.com/free-photo/people-walking-down-street_1194-1142.jpg"),
+        //image: NetworkImage("https://img.freepik.com/free-photo/people-walking-down-street_1194-1142.jpg"),
+        image: AssetImage(widget.backgroundImage == "assets/images/" ? 'assets/images/defaul.png' : widget.backgroundImage),
         fit: BoxFit.cover),
   ),
                 child: Text(
                   widget.content,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: phSecondary,
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic,
-                    //backgroundColor: phSecondary,
-                    /*background: Paint()
-                      ..strokeWidth = 30.0
-                      ..color = Colors.grey
-                      ..style = PaintingStyle.fill
-                      ..strokeJoin = StrokeJoin.round,*/
+                    backgroundColor: phSecond,
                   ),
                   ),
               ),
@@ -159,7 +143,14 @@ class _Post extends State<Post> {
               color: phSecondary,
               //color: commented ? Colors.black : Colors.blue,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Comment()
+                  ),
+                );
+              },
           ),
           IconButton(
             icon: Icon(
@@ -169,6 +160,7 @@ class _Post extends State<Post> {
             onPressed: () {
               setState(
                 () {
+                  print(marked);
                   marked = !marked;
                 }
               );

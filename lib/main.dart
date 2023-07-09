@@ -3,6 +3,7 @@ import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/login_view.dart';
 
+
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
 
