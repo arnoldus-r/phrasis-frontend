@@ -34,6 +34,7 @@ class _Profile extends State<Profile> {
         title: const Text('Perfil'),
       ),
       body: SafeArea(
+        bottom: false,
         child: Align(
           alignment: AlignmentDirectional(0, 1),
           child: ListView(

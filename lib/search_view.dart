@@ -28,6 +28,7 @@ class _Search extends State<Search> {
         title: const Text('Busqueda'),
       ),
       body: SafeArea(
+        bottom: false,
         child: Align(
           alignment: AlignmentDirectional(0, 1),
           child: ListView(

@@ -17,7 +17,7 @@ class _EditProfile extends State<EditProfile> {
       backgroundColor: phPrimary,
       appBar: AppBar(
         leading: IconButton(
-            icon: const Icon(
+            icon: const Icon( 
               Icons.arrow_back_ios,
               //color: phPrimary,
             ),
@@ -28,6 +28,7 @@ class _EditProfile extends State<EditProfile> {
         title: const Text('Perfil'),
       ),
       body: SafeArea(
+        bottom: false,
         child: Align(
           alignment: AlignmentDirectional(0, 1),
           child: ListView(
