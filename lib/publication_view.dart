@@ -68,7 +68,7 @@ class _Publication extends State<Publication> {
         children: [
           _Title(),
           const SizedBox(height: 21),
-          AreaField(controller: userController),
+          AreaField(controller: userController, lb: 'Frase'),
           const SizedBox(height: 13),
           CustomTextField(
             labelText: 'Imagen de fondo',

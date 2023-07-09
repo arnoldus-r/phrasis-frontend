@@ -147,7 +147,7 @@ class _Comment extends State<Comment> {
           //PasswordField(controller: passwordController),
           //const SizedBox(height: 21),
           const SizedBox(height: 21),
-          AreaField(controller: userController),
+          AreaField(controller: userController, lb: 'Comentario'),
           const SizedBox(height: 13),
           _FinishButton(),
           Divider(),

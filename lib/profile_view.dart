@@ -5,7 +5,12 @@ const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
 
 class Profile extends StatefulWidget {
-  const Profile({super.key});
+  final bool personalProfile;
+
+  const Profile({
+    super.key,
+    this.personalProfile = true, 
+  });
 
   @override
   State<Profile> createState() => _Profile();
@@ -58,13 +63,14 @@ class _Profile extends State<Profile> {
                             "@usuario",
                             textAlign: TextAlign.left,
                           ),
-                          ElevatedButton(
+                          widget.personalProfile ? ElevatedButton(
                               onPressed: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: ((context) => EditProfile())));
-                                }, child: Text("Editar")),
+                                }, child: Text("Editar")
+                          ) : Container(),
                         ],
                       ),
                       /*

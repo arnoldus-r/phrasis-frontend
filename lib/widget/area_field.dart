@@ -11,9 +11,10 @@ const String pattern = r"[A-Za-zÀ-ÿ]*";
 final regExp = RegExp(pattern);
 
 class AreaField extends StatefulWidget {
-  const AreaField({super.key, required this.controller});
+  const AreaField({super.key, required this.controller, this.lb = 'Descripción'});
 
   final TextEditingController controller;
+  final String lb;
 
   @override
   State<AreaField> createState() => _AreaField();
@@ -25,7 +26,7 @@ class _AreaField extends State<AreaField> {
     return CustomTextField(
       inputType: TextInputType.multiline,
       minLines: 3,
-      labelText: labelText,
+      labelText: widget.lb,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return errorNull;

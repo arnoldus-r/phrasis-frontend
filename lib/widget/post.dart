@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phrasis_frontend/comen_view.dart';
-
+import 'package:phrasis_frontend/profile_view.dart';
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -77,7 +77,14 @@ class _Post extends State<Post> {
             //color: Colors.blue,
             child: TextButton(
               //padding: const EdgeInsets.all(0),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Profile(personalProfile: false)
+                  ),
+                );
+              },
               child: SizedBox(
               width: double.infinity, child: Text(
               '@${widget.username}',
