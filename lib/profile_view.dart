@@ -17,6 +17,13 @@ class _Profile extends State<Profile> {
     return Scaffold(
       backgroundColor: phPrimary,
       appBar: AppBar( 
+        leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              //color: phPrimary,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
         elevation: 0,
         backgroundColor: phPrimary,
         title: const Text('Perfil'),

@@ -87,18 +87,36 @@ class _SignUpEnd extends State<SignUpEnd> {
           _Intereses(),
           const SizedBox(height: 13),
 
-          Container(
-            width: double.infinity,
-            child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          //Container(
+            //width: double.infinity,
+            //child: 
+            /*
+            Wrap(
+              direction:Axis.horizontal,
+              spacing: 8.0,
+              runSpacing: 8.0,
+            //mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-            Flexible(flex: 57, child:_prueba()),
-            Flexible(flex: 43, child: _prueba()),
-            ],
-          ),),
+              children: [
+                //Flexible(flex: 57, child: _prueba()),
+                //Flexible(flex: 43, child: _prueba()),
+                //Flexible(flex: 43, child: _prueba()),
+                _prueba(),
+                Container(
+                  constraints: BoxConstraints( 
+                    maxHeight: 24,
+                  ),
+                  child: Container(
+                    color: Colors.black,
+                    child: _prueba(),
+                  ),
+                ),
+              ],
+            ),
+            */
+          //),
           
-          _prueba(),
+          //_prueba(),
           //Text('b'),
           //Text('c'),
           // Fecha de nacimiento

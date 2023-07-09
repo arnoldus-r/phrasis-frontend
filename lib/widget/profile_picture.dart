@@ -36,7 +36,7 @@ class _ProfilePicture extends State<ProfilePicture> {
     );
   }
 
-   _getFromGallery() async {
+  _getFromGallery() async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       maxHeight: 512,

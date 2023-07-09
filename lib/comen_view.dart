@@ -4,6 +4,9 @@ import 'package:phrasis_frontend/search_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/widget/post.dart';
+import 'package:phrasis_frontend/widget/custom_text_field.dart';
+import 'package:phrasis_frontend/widget/area_field.dart';
+
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -26,6 +29,7 @@ class _Comment extends State<Comment> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController userController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +38,13 @@ class _Comment extends State<Comment> {
       child: Scaffold(
         backgroundColor: phSecondary,
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              //color: phPrimary,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
           title: const Text('Comentarios'),
           ),
         /*endDrawer: Drawer(
@@ -135,6 +146,11 @@ class _Comment extends State<Comment> {
           //const SizedBox(height: 21),
           //PasswordField(controller: passwordController),
           //const SizedBox(height: 21),
+          const SizedBox(height: 21),
+          AreaField(controller: userController),
+          const SizedBox(height: 13),
+          _FinishButton(),
+          Divider(),
           const SizedBox(height: 8),
           _publi(ph1, ""),
           const SizedBox(height: 8),
@@ -148,6 +164,30 @@ class _Comment extends State<Comment> {
           //_SignUp(),
         ],
       //),
+    );
+
+  }
+
+  Widget _FinishButton() {
+    return ElevatedButton(
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {
+
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Please fill nput')
+            ),
+          );
+        }
+      },
+      child: SizedBox(
+        width: double.infinity,
+        child: const Text(
+          'Comentar',
+          textAlign: TextAlign.center,
+        ),
+      ),
     );
 
   }

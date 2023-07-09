@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:phrasis_frontend/profile_view.dart';
 import 'package:phrasis_frontend/search_view.dart';
+import 'package:phrasis_frontend/publication_view.dart';
 import 'package:phrasis_frontend/widget/password_field.dart';
 import 'package:phrasis_frontend/widget/email_field.dart';
 import 'package:phrasis_frontend/widget/post.dart';
 import 'package:phrasis_frontend/fav_view.dart';
-
+import 'dart:io';
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -48,7 +49,14 @@ class _Home extends State<Home> {
               Icons.edit,
               color: phSecondary,
             ),
-            onPressed: () {},// => Navigator.pop(context),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Publication()
+                  ),
+                );
+              },// => Navigator.pop(context),
           ),
           ),
         endDrawer: Drawer(
@@ -74,6 +82,7 @@ class _Home extends State<Home> {
               leading: Icon(Icons.account_circle_rounded),
               title: const Text('Perfil'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -85,12 +94,21 @@ class _Home extends State<Home> {
             ListTile(
               leading: Icon(Icons.edit),
               title: const Text('Frasear'),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Publication()
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.search),
               title: const Text('Buscar'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -103,6 +121,7 @@ class _Home extends State<Home> {
               leading: Icon(Icons.bookmark_rounded),
               title: const Text('Favoritos'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -114,7 +133,10 @@ class _Home extends State<Home> {
             ListTile(
               leading: Icon(Icons.logout),
               title: const Text('Salir'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
             ),
 
             ],

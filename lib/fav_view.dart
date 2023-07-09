@@ -41,6 +41,13 @@ class _Favorite extends State<Favorite> {
       child: Scaffold(
         backgroundColor: phSecondary,
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              //color: phPrimary,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
           title: const Text('Favoritos'),
           ),
         /*endDrawer: Drawer(
