@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:phrasis_frontend/edit_profile_view.dart';
+import 'package:phrasis_frontend/edit_profile_view.dart';
 
 const phPrimary = Color(0xFF604777);
 const phSecondary = Color(0xFFEBE8EE);
@@ -57,9 +59,18 @@ class _Profile extends State<Profile> {
                           Text(
                             "@usuario",
                             textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: Text("Editar")),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) => EditProfile())));
+                              },
+                              child: Text("Actualizar")),
                         ],
                       ),
                       Text(
@@ -70,7 +81,8 @@ class _Profile extends State<Profile> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 20.0, top: 10.0),
+                        margin: EdgeInsets.only(bottom: 8.0, top: 10.0),
+                        padding: EdgeInsets.only(left: 10.0, top: 2.0),
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Nombre:",
@@ -78,17 +90,20 @@ class _Profile extends State<Profile> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 20.0, top: 10.0),
+                        margin: EdgeInsets.only(bottom: 8.0, top: 10.0),
+                        padding: EdgeInsets.only(left: 10.0, top: 2.0),
                         alignment: Alignment.centerLeft,
                         child: Text("Descripcion:", textAlign: TextAlign.left),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 20.0, top: 10.0),
+                        margin: EdgeInsets.only(bottom: 8.0, top: 10.0),
+                        padding: EdgeInsets.only(left: 10.0, top: 2.0),
                         alignment: Alignment.centerLeft,
                         child: Text("Correo:", textAlign: TextAlign.left),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 20.0, top: 10.0),
+                        margin: EdgeInsets.only(bottom: 8.0, top: 10.0),
+                        padding: EdgeInsets.only(left: 10.0, top: 2.0),
                         alignment: Alignment.centerLeft,
                         child: Text("Idioma:", textAlign: TextAlign.left),
                       ),
